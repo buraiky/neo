@@ -14,9 +14,11 @@ You'll edit this file in Task 2.
 """
 import csv
 import json
+import pprint as pp
 
 from models import NearEarthObject, CloseApproach
-
+from helpers import cd_to_datetime, datetime_to_str
+from database import NEODatabase
 
 def load_neos(neo_csv_path):
     """Read near-Earth object information from a CSV file.
@@ -24,9 +26,32 @@ def load_neos(neo_csv_path):
     :param neo_csv_path: A path to a CSV file containing data about near-Earth objects.
     :return: A collection of `NearEarthObject`s.
     """
-    # TODO: Load NEO data from the given CSV file.
-    return ()
+    # TODO: Load NEO data )from the given CSV file.
 
+    neo={} # A dictionary of NEO objects indexed by designation (key is des)
+    index=[3, 4, 7, 15 ] # The data columns we need from the CSV file 
+
+    with open(neo_csv_path) as file: 
+        data=csv.reader(file) # Returns a reader object 
+
+        next(data) # skip the header 
+        for i, row in enumerate(data):
+            srow = [ row[j] for j in index]
+
+            neo[srow[0]]= NearEarthObject(
+                    designation=srow[0], 
+                    name=srow[1], 
+                    hazardous=srow[2], 
+                    diameter=srow[3]) 
+
+            neo[srow[1]]= NearEarthObject(
+                    designation=srow[0], 
+                    name=srow[1], 
+                    hazardous=srow[2], 
+                    diameter=srow[3]) 
+
+    # return a dictionary of neo objects indexed by designation
+    return neo
 
 def load_approaches(cad_json_path):
     """Read close approach data from a JSON file.
@@ -35,4 +60,41 @@ def load_approaches(cad_json_path):
     :return: A collection of `CloseApproach`es.
     """
     # TODO: Load close approach data from the given JSON file.
-    return ()
+
+    approaches={} # A dictionary of Close Approach indexed by designation (key is des)
+
+    index=[0, 3, 4, 7] # The data columns we need from the JSON file 
+
+    with open(cad_json_path) as file:
+        data = json.load(file) 
+        for i, record in enumerate(data['data']):
+            srow=[record[j] for j in index ]
+
+            if srow[0] not in approaches:
+                approaches[srow[0]]=[]
+
+            approaches[srow[0]].append(
+                    CloseApproach(
+                        des=srow[0], 
+                        cd=srow[1] , 
+                        dist=srow[2], 
+                        v_rel=srow[3]))
+    return approaches
+
+neo=load_neos("./data/neos.csv")
+approaches=load_approaches("./data/cad.json")
+
+"""
+print("NEO ...") 
+pp.pprint(neo)
+
+print("CAD ...") 
+pp.pprint(approaches)
+
+N=NEODatabase(neo, approaches)
+
+print("==NEOS==") 
+pp.pprint(N._neos)
+print("==CAD==")
+pp.pprint(N._approaches)
+"""
