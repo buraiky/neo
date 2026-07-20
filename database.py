@@ -57,6 +57,7 @@ class NEODatabase:
             for ckey, ca in self._approaches.items():
                 #print(ca)
                 if ckey == nkey:
+                    breakpoint()
                     obj.approaches.extend(ca)
 
     def get_neo_by_designation(self, designation):

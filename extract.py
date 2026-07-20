@@ -42,13 +42,15 @@ def load_neos(neo_csv_path):
                     designation=srow[0], 
                     name=srow[1], 
                     hazardous=srow[2], 
-                    diameter=srow[3]) 
+                    diameter=srow[3],
+                    approaches=[]) 
 
             neo[srow[1]]= NearEarthObject(
                     designation=srow[0], 
                     name=srow[1], 
                     hazardous=srow[2], 
-                    diameter=srow[3]) 
+                    diameter=srow[3],
+                    approaches=[])
 
     # return a dictionary of neo objects indexed by designation
     return neo
@@ -98,3 +100,5 @@ pp.pprint(N._neos)
 print("==CAD==")
 pp.pprint(N._approaches)
 """
+N=NEODatabase(neo, approaches)
+

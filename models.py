@@ -73,7 +73,7 @@ class NearEarthObject:
             self.diameter = float(info['diameter']) 
             
         # Create an empty initial collection of linked approaches.
-        self.approaches = []
+        self.approaches = info['approaches']
 
     @property
     def fullname(self):
@@ -185,5 +185,4 @@ class CloseApproach:
         #return f"At {time_str}, {neo.fullname} approaches Earth at a distance of {distance:.2f} au and a velocity of {velocity:.2f} km/s."
     def __repr__(self):
         """Return `repr(self)`, a computer-readable string representation of this object."""
-        return f"CloseApproach(time={self.time_str!r}, distance={self.distance:.2f}, " \
-               f"velocity={self.velocity:.2f}, neo={self.neo!r})"
+        return f"CloseApproach(time={self.time_str!r}, distance={self.distance:.2f} velocity={self.velocity:.2f}, neo={self.neo!r})"
