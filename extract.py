@@ -28,7 +28,7 @@ def load_neos(neo_csv_path):
     """
     # TODO: Load NEO data )from the given CSV file.
 
-    neo={} # A dictionary of NEO objects indexed by designation (key is des)
+    neo=[]
     index=[3, 4, 7, 15 ] # The data columns we need from the CSV file 
 
     with open(neo_csv_path) as file: 
@@ -38,21 +38,14 @@ def load_neos(neo_csv_path):
         for i, row in enumerate(data):
             srow = [ row[j] for j in index]
 
-            neo[srow[0]]= NearEarthObject(
+            neo.append(NearEarthObject(
                     designation=srow[0], 
                     name=srow[1], 
                     hazardous=srow[2], 
                     diameter=srow[3],
-                    approaches=[]) 
+                    approaches=[])) 
 
-            neo[srow[1]]= NearEarthObject(
-                    designation=srow[0], 
-                    name=srow[1], 
-                    hazardous=srow[2], 
-                    diameter=srow[3],
-                    approaches=[])
-
-    # return a dictionary of neo objects indexed by designation
+    # return a list of neo objects
     return neo
 
 def load_approaches(cad_json_path):
@@ -63,7 +56,7 @@ def load_approaches(cad_json_path):
     """
     # TODO: Load close approach data from the given JSON file.
 
-    approaches={} # A dictionary of Close Approach indexed by designation (key is des)
+    approaches=[] # A list of Close Approach indexed by designation (key is des)
 
     index=[0, 3, 4, 7] # The data columns we need from the JSON file 
 
@@ -72,10 +65,7 @@ def load_approaches(cad_json_path):
         for i, record in enumerate(data['data']):
             srow=[record[j] for j in index ]
 
-            if srow[0] not in approaches:
-                approaches[srow[0]]=[]
-
-            approaches[srow[0]].append(
+            approaches.append(
                     CloseApproach(
                         des=srow[0], 
                         cd=srow[1] , 
@@ -100,5 +90,5 @@ pp.pprint(N._neos)
 print("==CAD==")
 pp.pprint(N._approaches)
 """
-N=NEODatabase(neo, approaches)
-
+#N=NEODatabase(neo, approaches)
+ 

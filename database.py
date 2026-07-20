@@ -42,10 +42,26 @@ class NEODatabase:
         self._neos = neos
         self._approaches = approaches
 
+        self.neos_designation_hash={}
+        self.neos_name_hash={}
+
+        self.approaches_hash={}
+
         # TODO: What additional auxiliary data structures will be useful?
 
         # TODO: Link together the NEOs and their close approaches.
 
+        for obj in self._neos:
+            self.neos_designation_hash[obj.designation]=obj
+            self.neos_name_hash[obj.name]=obj
+        breakpoint()
+
+        for ca in self._approaches:
+            for nkey, obj in self.neos_designation_hash.items():
+                if nkey == ca.designation:
+                    ca.neo = obj 
+
+        """
         for ckey, cal in self._approaches.items():
             for nkey, obj in self._neos.items():
                 if nkey == ckey:
@@ -59,6 +75,7 @@ class NEODatabase:
                 if ckey == nkey:
                     breakpoint()
                     obj.approaches.extend(ca)
+        """
 
     def get_neo_by_designation(self, designation):
         """Find and return an NEO by its primary designation.
@@ -75,10 +92,10 @@ class NEODatabase:
         """
         # TODO: Fetch an NEO by its primary designation.
 
-        if designation not in self._neos:
+        if designation not in self.neos_designation_hash:
             return None
         else:
-            return self._neos[designation]
+            return self.neos_designation_hash[designation]
 
         # TODO: Fetch an NEO by its primary designation.
         #return None
@@ -98,10 +115,10 @@ class NEODatabase:
         :param name: The name, as a string, of the NEO to search for.
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
-        if name not in self._neos:
+        if name not in self.neos_name_hash:
             return None
         else:
-            return self._neos[name]
+            return self.neos_name_hash[name]
 
         # TODO: Fetch an NEO by its name.
         #return None
