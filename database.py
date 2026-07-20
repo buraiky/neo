@@ -63,14 +63,6 @@ class NEODatabase:
 
             self.approaches_hash[ca._designation].append(ca)
 
-        """
-        # This is taking so much time !!!
-        for ca in self._approaches:
-            for nkey, obj in self.neos_designation_hash.items():
-                if nkey == ca._designation:
-                    ca.neo = obj 
-        """
-
         for ca in self._approaches:
                 ca.neo = self.neos_designation_hash[ca._designation]
 
