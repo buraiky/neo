@@ -56,7 +56,7 @@ class NearEarthObject:
 
         self.name = None
 
-        if info['name'] != None: 
+        if info['name'] != '':
             self.name = info['name']
 
         self.hazardous = False
@@ -69,7 +69,7 @@ class NearEarthObject:
 
         self.diameter = float('nan') 
 
-        if info['diameter']:
+        if info['diameter'] != '':
             self.diameter = float(info['diameter']) 
             
         # Create an empty initial collection of linked approaches.
@@ -104,7 +104,7 @@ class NearEarthObject:
     def __repr__(self):
         """Return `repr(self)`, a computer-readable string representation of this object."""
         return f"NearEarthObject(designation={self.designation!r}, name={self.name!r}, " \
-               f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r})"
+               f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r}, approaches={self.approaches})"
 
 
 class CloseApproach:

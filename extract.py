@@ -75,20 +75,3 @@ def load_approaches(cad_json_path):
 
 neo=load_neos("./data/neos.csv")
 approaches=load_approaches("./data/cad.json")
-
-"""
-print("NEO ...") 
-pp.pprint(neo)
-
-print("CAD ...") 
-pp.pprint(approaches)
-
-N=NEODatabase(neo, approaches)
-
-print("==NEOS==") 
-pp.pprint(N._neos)
-print("==CAD==")
-pp.pprint(N._approaches)
-"""
-#N=NEODatabase(neo, approaches)
- 

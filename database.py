@@ -51,31 +51,33 @@ class NEODatabase:
 
         # TODO: Link together the NEOs and their close approaches.
 
+        # NEO HASHES
         for obj in self._neos:
             self.neos_designation_hash[obj.designation]=obj
             self.neos_name_hash[obj.name]=obj
-        breakpoint()
 
+        #CA HASHES
+        for ca in self._approaches:
+            if ca._designation not in self.approaches_hash:
+                self.approaches_hash[ca._designation] = []
+
+            self.approaches_hash[ca._designation].append(ca)
+
+        """
+        # This is taking so much time !!!
         for ca in self._approaches:
             for nkey, obj in self.neos_designation_hash.items():
-                if nkey == ca.designation:
+                if nkey == ca._designation:
                     ca.neo = obj 
-
         """
-        for ckey, cal in self._approaches.items():
-            for nkey, obj in self._neos.items():
-                if nkey == ckey:
-                    for ca in cal:
-                        ca.neo = obj 
 
-        for nkey, obj in self._neos.items():
-            #print(obj) 
-            for ckey, ca in self._approaches.items():
-                #print(ca)
-                if ckey == nkey:
-                    breakpoint()
+        for ca in self._approaches:
+                ca.neo = self.neos_designation_hash[ca._designation]
+
+        for obj in self._neos:
+            for ckey, ca in self.approaches_hash.items():
+                if ckey == obj.designation:
                     obj.approaches.extend(ca)
-        """
 
     def get_neo_by_designation(self, designation):
         """Find and return an NEO by its primary designation.
