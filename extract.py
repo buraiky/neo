@@ -75,5 +75,3 @@ def load_approaches(cad_json_path):
 
 neo=load_neos("./data/neos.csv")
 approaches=load_approaches("./data/cad.json")
-
-# ADDED FOR TESTING
