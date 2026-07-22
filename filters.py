@@ -181,6 +181,7 @@ def limit(iterator, n=None):
     if n is None or n == 0:
         for i in iterator:
             yield i
+        return 
 
     for obj in itertools.islice( iterator, n):
         yield obj
