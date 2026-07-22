@@ -186,13 +186,15 @@ def limit(iterator, n=None):
 
     #breakpoint()
     if n is None or n == 0 :
-        return iterator
+        yield iterator
 
     """
     if n == 0:
         return iterator
     """
 
-    yield itertools.islice( iterator, n)
+    #yield tuple(itertools.islice( iterator, n))
+    for obj in itertools.islice( iterator, n):
+        yield obj
 
 
