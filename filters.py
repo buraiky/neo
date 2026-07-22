@@ -133,8 +133,6 @@ def create_filters(
     :param hazardous: Whether the NEO of a matching `CloseApproach` is potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-    # TODO: Decide how you will represent your filters.
-
 
     filters = []
 
@@ -166,9 +164,6 @@ def create_filters(
         filters.append(DiameterFilter(operator.le, diameter_max))
 
     if hazardous is not None:
-        #hazardous = 'True'
-    #else:
-        #hazardous = 'False'
         filters.append(HazardousFilter(operator.eq, hazardous))
 
     return filters
@@ -182,19 +177,11 @@ def limit(iterator, n=None):
     :param n: The maximum number of values to produce.
     :yield: The first (at most) `n` values from the iterator.
     """
-    # TODO: Produce at most `n` values from the given iterator.
-
     #breakpoint()
-    if n is None or n == 0 :
-        yield iterator
+    if n is None or n == 0:
+        for i in iterator:
+            yield i
 
-    """
-    if n == 0:
-        return iterator
-    """
-
-    #yield tuple(itertools.islice( iterator, n))
     for obj in itertools.islice( iterator, n):
         yield obj
-
 
