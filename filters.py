@@ -184,14 +184,15 @@ def limit(iterator, n=None):
     """
     # TODO: Produce at most `n` values from the given iterator.
 
-    if n is None:
+    #breakpoint()
+    if n is None or n == 0 :
         return iterator
 
+    """
     if n == 0:
         return iterator
+    """
 
-    yield itertools.islice(iterator, n)
-
-
+    yield itertools.islice( iterator, n)
 
 

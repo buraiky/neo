@@ -12,6 +12,8 @@ You'll edit this file in Part 4.
 """
 import csv
 import json
+from datetime import datetime
+from itertools import islice 
 
 
 def write_to_csv(results, filename):
@@ -37,7 +39,7 @@ def write_to_csv(results, filename):
 
         for approach in results:
             row_data = {
-                'datetime_utc': approach.time_str,
+                'datetime_utc': approach.time.strftime("%Y-%m-%d %H:%M"),
                 'distance_au': approach.distance,
                 'velocity_km_s': approach.velocity,
                 'designation': approach.neo.designation,
@@ -65,7 +67,7 @@ def write_to_json(results, filename):
         data = []
         for approach in results:
             approach_data = {
-                'datetime_utc': approach.time_str,
+                'datetime_utc': approach.time.strftime("%Y-%m-%d %H:%M"),
                 'distance_au': approach.distance,
                 'velocity_km_s': approach.velocity,
             }
