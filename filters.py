@@ -166,6 +166,9 @@ def create_filters(
         filters.append(DiameterFilter(operator.le, diameter_max))
 
     if hazardous is not None:
+        #hazardous = 'True'
+    #else:
+        #hazardous = 'False'
         filters.append(HazardousFilter(operator.eq, hazardous))
 
     return filters

@@ -152,34 +152,5 @@ class NEODatabase:
                 # TODO: Generate `CloseApproach` objects that match all of the filters.
 
         for approach in self._approaches:
-            #print("FILTERS:") 
-            #for f in filters:
-                #print(f) 
-            #print("FROM DATABASE")
-            #print (f"DB->{approach}")
-            #print (f"{approach.distance}")
-            #print (f"Apply Filter {f(approach)}")
-            #flag = True
-
-            """
-            #breakpoint()
-            for f in filters:
-                if not f(approach):
-                    print(f"flag: {flag}")
-                    flag = False
-                    break
-
-                if flag:
-                    print(f"flag: {flag}")
-                    yield approach
-
-            #breakpoint()
-            for f in filters:
-                if f(approach): 
-                    yield approach
-
-            """
-
-            for f in filters:
-                if all(map(lambda f: f(approach), filters)):
-                    yield approach
+            if all( f(approach) for f in filters):
+                yield approach
