@@ -47,10 +47,6 @@ class NEODatabase:
 
         self.approaches_hash={}
 
-        # TODO: What additional auxiliary data structures will be useful?
-
-        # TODO: Link together the NEOs and their close approaches.
-
         # NEO HASHES
         for obj in self._neos:
             self.neos_designation_hash[obj.designation]=obj
@@ -84,16 +80,10 @@ class NEODatabase:
         :param designation: The primary designation of the NEO to search for.
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
-        # TODO: Fetch an NEO by its primary designation.
-
         if designation not in self.neos_designation_hash:
             return None
         else:
             return self.neos_designation_hash[designation]
-
-        # TODO: Fetch an NEO by its primary designation.
-        #return None
-
 
     def get_neo_by_name(self, name):
         """Find and return an NEO by its name.
@@ -114,9 +104,6 @@ class NEODatabase:
         else:
             return self.neos_name_hash[name]
 
-        # TODO: Fetch an NEO by its name.
-        #return None
-
     def query(self, filters=()):
         """Query close approaches to generate those that match a collection of filters.
 
@@ -131,26 +118,6 @@ class NEODatabase:
         :param filters: A collection of filters capturing user-specified criteria.
         :return: A stream of matching `CloseApproach` objects.
         """
-        # TODO: Generate `CloseApproach` objects that match all of the filters.
-        #ORIIGNAI FILE 
-        #for approach in self._approaches:
-            #yield approach
-
-        #if filters:
-            #for approach in self._approaches:
-                #if all(map(lambda f: f(approach), filters)):
-                    #yield approach
-
-        """
-        for approach in self._approaches: 
-            if map(lambda f: f(approach), filters):
-                yield approach
-        """
-
-
-
-                # TODO: Generate `CloseApproach` objects that match all of the filters.
-
         for approach in self._approaches:
             if all( f(approach) for f in filters):
                 yield approach
